@@ -1,38 +1,140 @@
-.App {
-  text-align: center;
+.nav-tab{
+    font-weight: bold;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-bg{
+    background-color: rgb(255, 238, 0);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.space{
+    width: 100vw;
+    height: 100px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.logo{
+    width: 50px;
+    height: 50px;
 }
 
-.App-link {
-  color: #61dafb;
+.clear{
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    background-color: red;
+    color:white;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: absolute;
+    right: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.show-action{
+    font-size: 10px;
+    background-color: rgb(65, 202, 65);
+    color:white;
+    outline: none;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    position: absolute;
+    right:50px;
+}
+
+.poll-result{
+    width: 500px;
+    height: 500px;
+}
+
+.form{
+    width: 400px;
+    position: absolute;
+    left: calc(50% - 200px);
+    top: calc(50% - 200px);
+    box-shadow: rgb(95, 93, 77) 0px 0px 10px;
+}
+
+.margin-20{
+    margin: 20px;
+}
+
+.padding-10{
+    padding:10px;
+}
+
+.sort-icon{
+    width: 15px;
+    height: 15px;
+}
+
+.side-bar{
+    width: 400px;
+}
+
+.brand-name{
+    font-weight: bold;
+}
+
+.grid-object{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(255, 238, 0);
+    margin:20px;
+    padding:5px;
+    overflow-wrap: break-word;
+    cursor: pointer;
+}
+
+.select{
+    background-color: rgb(25, 238, 74);
+}
+
+.ballot{
+    width: 800px;
+    position: absolute;
+    left: calc(50vw - 400px);
+}
+
+/*-------------------------login----------------------*/
+.login-bg-left{
+    background-color: rgb(255, 238, 0);
+    height: 100vh;
+    width: 50vw;
+}
+
+.login-fg{
+    width: 800px;
+    height: 500px;
+    position: absolute;
+    top: calc(50vh - 250px);
+    left: calc(50vw - 400px);
+    box-shadow: rgb(0, 0, 0) 0px 0px 10px;
+    display: flex;
+}
+
+.login-form{
+    width: 400px;
+    height: 100%;
+}
+
+.brand-cont{
+    margin-left:30px;
+    margin-right:30px;
+}
+
+.user-name{
+    font-size: 30;
+    font-weight: bold;
+    margin-left:30px;
+    margin-right:30px;
+    min-width: 100px;
+    max-width: fit-content;
+    padding-top: 4px;
+    text-align: center;
+    height: 34px;
+    border-radius: 20px;
+    box-shadow: rgb(115, 113, 88) 0px 0px 10px;
+    cursor: pointer;
 }
