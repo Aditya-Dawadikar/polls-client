@@ -6,6 +6,10 @@
     background-color: rgb(255, 238, 0);
 }
 
+.link{
+    text-decoration: none;
+}
+
 .space{
     width: 100vw;
     height: 100px;
@@ -85,16 +89,19 @@
     padding:5px;
     overflow-wrap: break-word;
     cursor: pointer;
+    box-shadow: rgba(0,0,0,0.5) 0px 0px 10px;
+}
+
+.grid-object:hover{
+    background-color: aqua;
 }
 
 .select{
-    background-color: rgb(25, 238, 74);
+    background-color: aqua;
 }
 
 .ballot{
-    width: 800px;
-    position: absolute;
-    left: calc(50vw - 400px);
+    padding: 10px;
 }
 
 /*-------------------------login----------------------*/
@@ -102,20 +109,23 @@
     background-color: rgb(255, 238, 0);
     height: 100vh;
     width: 50vw;
+    position: absolute;
+    left: 0;
 }
 
 .login-fg{
-    width: 800px;
+    z-index: 1;
+    max-width: 800px;
     height: 500px;
     position: absolute;
     top: calc(50vh - 250px);
-    left: calc(50vw - 400px);
+    /* left: calc(50vw - 400px); */
     box-shadow: rgb(0, 0, 0) 0px 0px 10px;
-    display: flex;
+    /* display: flex; */
 }
 
 .login-form{
-    width: 400px;
+    /* width: 400px; */
     height: 100%;
 }
 

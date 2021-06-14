@@ -91,10 +91,10 @@ const AnalysePoll = (props) => {
             return <div></div>
         }else{
             return <div className="poll-result">
-                        <Bar data={data} options={options} />
-                        <br/><br/>
-                        <Stats poll={props.poll}/>
-                        
+                        <div className="row">
+                            <div className="col"><Bar data={data} options={options} /></div>
+                            <div className="col"><Stats poll={props.poll}/></div>
+                        </div>
                     </div>
         }
     }

@@ -29,7 +29,7 @@ const Stats = (props) => {
     return (
         <div className="Details">
                 <div className="poll-title brand-name">{props.poll.name}</div>
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -50,7 +50,7 @@ const Stats = (props) => {
                                     str+="+"+diff
                                 }
                                 return (
-                                    <tr>
+                                    <tr key={index}>
                                         <th scope="row">{index+1}</th>
                                         <td>{option.name}</td>
                                         <td>{option.count}</td>

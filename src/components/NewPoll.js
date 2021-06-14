@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState,useRef,useEffect } from 'react'
+import axios from 'axios'
 
-const NewPoll = () => {
+const NewPoll = (props) => {
 
     const [optionList,optionListSetter] = useState([]);
     const [pollName,pollNameSetter] = useState("")
@@ -30,6 +31,8 @@ const NewPoll = () => {
 
     const pubilshPoll=(e)=>{
         e.preventDefault()
+        
+
         let optionsArray=[]
         for(let i=0;i<optionList.length;i++){
             let optionObject = {
@@ -52,45 +55,59 @@ const NewPoll = () => {
         }else{flag++}
 
         if(flag==2){
-            console.log(newPoll)
-            alert("new poll created")
+            // console.log(newPoll)
+
+            axios.post('http://localhost:3030/api/poll/createpoll',{
+                id:localStorage.getItem('userid'),
+                poll:newPoll
+            })
+            .then(response=>{
+                // console.log(response)
+                if(response.status===200){
+                    alert("poll created successfully")
+                    props.setCreated(response.data.poll)
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+            })
         }
 
     }
 
     return (
-        <form className="margin-20">
-            <div className="mb-3">
-                <label className="form-label">Poll Name</label>
-                <input onChange={(e)=>{pollNameSetter(e.target.value)}} type="text" className="form-control" id="poll-name" placeholder="My Poll"/>
-            </div>
-            <div className="mb-3 row g-3">
-                <div className="col-auto">
-                    <label className="visually-hidden">Poll Option</label>
-                    <input type="text" readOnly className="form-control-plaintext" id="poll-option-name" value="Add Option"/>
+            <form className="margin-20">
+                <div className="mb-3">
+                    <label className="form-label">Poll Name</label>
+                    <input onChange={(e)=>{pollNameSetter(e.target.value)}} type="text" className="form-control" id="poll-name" placeholder="My Poll"/>
                 </div>
-                <div className="col-auto">
-                    <label className="visually-hidden">Option A</label>
-                    <input ref={optionBox} type="text" className="form-control" id="option-input" placeholder="Option A" onChange={(e)=>{setOption(e.target.value)}}/>
+                <div className="mb-3 row g-3">
+                    <div className="col-auto">
+                        <label className="visually-hidden">Poll Option</label>
+                        <input type="text" readOnly className="form-control-plaintext" id="poll-option-name" value="Add Option"/>
+                    </div>
+                    <div className="col-auto">
+                        <label className="visually-hidden">Option A</label>
+                        <input ref={optionBox} type="text" className="form-control" id="option-input" placeholder="Option A" onChange={(e)=>{setOption(e.target.value)}}/>
+                    </div>
+                    <div className="col-auto">
+                        <button className="btn btn-primary mb-3" onClick={(e)=>{addOption(e)}}>Add</button>
+                    </div>
                 </div>
-                <div className="col-auto">
-                    <button className="btn btn-primary mb-3" onClick={(e)=>{addOption(e)}}>Add</button>
+                <div>
+                <ul className="list-group">
+                    {
+                        optionList.map((option,index)=>{
+                            return <li key={index} className="list-group-item">{option}
+                                        <button className="clear" onClick={(e)=>{clearOption(e,index)}}>X</button>
+                                    </li>
+                        })
+                    }
+                </ul>
+                <br/>
                 </div>
-            </div>
-            <div>
-            <ul className="list-group">
-                {
-                    optionList.map((option,index)=>{
-                        return <li key={index} className="list-group-item">{option}
-                                    <button className="clear" onClick={(e)=>{clearOption(e,index)}}>X</button>
-                                </li>
-                    })
-                }
-            </ul>
-            <br/>
-            </div>
-            <button onClick={(e)=>{pubilshPoll(e)}} className="btn btn-primary mb-3">Create Poll</button>
-        </form>
+                <button onClick={(e)=>{pubilshPoll(e)}} className="btn btn-primary mb-3">Create Poll</button>
+            </form>
     )
 }
 

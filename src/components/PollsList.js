@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React,{useState,useEffect} from 'react'
 
 const PollsList = (props) => {
@@ -16,6 +17,22 @@ const PollsList = (props) => {
 
     const deletePoll=(e,index)=>{
         e.preventDefault()
+
+        // console.log(polls[index]._id);
+
+        axios.post('http://localhost:3030/api/poll/deletepoll',{
+            userid:localStorage.getItem('userid'),
+            poll:polls[index]._id
+        })
+        .then(response=>{
+            if(response.status===200){
+                alert("poll deleted successfully")
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+
         setPolls(polls.filter((elem,id)=>{
             if(index!==id){return elem}
         }))
