@@ -26,7 +26,8 @@ const VotingScreen = () => {
         if(localStorage.getItem('userid')===null){
             let currURL = window.location.href
             let token = currURL.split('/')
-            let redirect = '/vote/'+token[4]+"/"+token[5]
+            let redirect=currURL
+            // let redirect = '/vote/'+token[4]+"/"+token[5]
             localStorage.setItem('redirect',redirect)
             window.location.replace('/')
         }
@@ -38,23 +39,12 @@ const VotingScreen = () => {
         let ownerId
         let pollId
         
-        if(localStorage.getItem('userid')===null){
+        if(localStorage.getItem('userid')!==null){
             currURL = window.location.href
             tokens= currURL.split('/')
             ownerId = tokens[4]
             pollId = tokens[5]
         }
-        else{
-            currURL = localStorage.getItem('redirect')
-            tokens= currURL.split('/')
-            ownerId = tokens[2]
-            pollId = tokens[3]
-        }
-        // let tokens = currURL.split('/')
-        // let ownerId = tokens[2]
-        // let pollId = tokens[3]
-
-        // console.log(tokens)
 
         let url=baseURL+"/api/poll/getpoll/"+ownerId+"/"+pollId
         console.log(url)
