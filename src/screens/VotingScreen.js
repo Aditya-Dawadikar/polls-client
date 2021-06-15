@@ -33,13 +33,28 @@ const VotingScreen = () => {
     })
 
     useEffect(()=>{
-        // let currURL = window.location.href
-        let currURL = localStorage.getItem('redirect')
-        let tokens = currURL.split('/')
-        let ownerId = tokens[2]
-        let pollId = tokens[3]
+        let currURL
+        let tokens
+        let ownerId
+        let pollId
+        
+        if(localStorage.getItem('userid')===null){
+            currURL = window.location.href
+            tokens= currURL.split('/')
+            ownerId = tokens[4]
+            pollId = tokens[5]
+        }
+        else{
+            currURL = localStorage.getItem('redirect')
+            tokens= currURL.split('/')
+            ownerId = tokens[2]
+            pollId = tokens[3]
+        }
+        // let tokens = currURL.split('/')
+        // let ownerId = tokens[2]
+        // let pollId = tokens[3]
 
-        console.log(tokens)
+        // console.log(tokens)
 
         let url=baseURL+"/api/poll/getpoll/"+ownerId+"/"+pollId
         console.log(url)
