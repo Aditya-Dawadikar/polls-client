@@ -1,4 +1,4 @@
 var secrets={
-    baseAPIURL:"http://localhost:3030"
+    baseAPIURL:" https://make-polls-server.herokuapp.com"
 }
 module.exports = secrets
