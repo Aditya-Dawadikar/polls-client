@@ -23,7 +23,6 @@ const VotingScreen = () => {
     let baseURL=secrets.baseAPIURL
 
     useEffect(()=>{
-        console.log(localStorage.getItem('userid'))
         if(localStorage.getItem('userid')===null){
             let currURL = window.location.href
             let token = currURL.split('/')
@@ -34,13 +33,19 @@ const VotingScreen = () => {
     })
 
     useEffect(()=>{
-        let currURL = window.location.href
+        // let currURL = window.location.href
+        let currURL = localStorage.getItem('redirect')
         let tokens = currURL.split('/')
-        let ownerId = tokens[4]
-        let pollId = tokens[5]
+        let ownerId = tokens[2]
+        let pollId = tokens[3]
+
+        console.log(tokens)
+
         let url=baseURL+"/api/poll/getpoll/"+ownerId+"/"+pollId
+        console.log(url)
         axios.get(url)
         .then(response=>{
+            console.log(response.data)
             setPoll(response.data.poll)
             let votersList=response.data.poll.voters.map(voter=>{
                 return String(voter)
