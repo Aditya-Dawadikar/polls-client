@@ -7,6 +7,7 @@ const PollsList = (props) => {
     const [polls,setPolls] = useState([])
 
     let baseURL=secrets.baseAPIURL
+    let baseClientURL = secrets.baseClientURL
 
     useEffect(() => {
         setPolls(props.polls)
@@ -54,7 +55,7 @@ const PollsList = (props) => {
     }
 
     const copyLink = (e,index)=>{
-        let url = "http://localhost:3000/vote/"
+        let url = baseClientURL+"/vote/"
         let ownerId = localStorage.getItem('userid')
         let pollId=polls[index]._id
 
