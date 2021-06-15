@@ -3,32 +3,31 @@ import Navbar from '../components/Navbar'
 import PollsList from '../components/PollsList'
 import AnalysePoll from '../components/AnalysePoll'
 import axios from 'axios'
+import secrets from '../secrets'
 
 const MyPolls = () => {
 
-    const [polls,setPolls] = useState([
-        {
-            name:"Poll 1",
-            options:[
-                {
-                    name: "Aditya",
-                    count: 10
-                },{
-                    name: "Chandler",
-                    count: 11
-                }
-            ]
-        }
-    ])
+    const [polls,setPolls] = useState([])
     
-    const [currPoll,setCurrPoll] = useState(polls[0])
+    const [currPoll,setCurrPoll] = useState()
 
     const handleSetPoll=(index)=>{
         setCurrPoll(polls[index])
     }
 
+    let baseURL=secrets.baseAPIURL
+    
     useEffect(()=>{
-        axios.get('http://localhost:3030/api/poll/mypolls/'+localStorage.getItem('userid'))
+        console.log(localStorage.getItem('userid'))
+        if(localStorage.getItem('userid')===null){
+            localStorage.setItem('redirect','/user/mypolls')
+            window.location.replace('/')
+        }
+    })
+
+    useEffect(()=>{
+        let url = baseURL+"/api/poll/mypolls/"
+        axios.get(url+localStorage.getItem('userid'))
         .then(response=>{
             console.log(response.data)
             setPolls(response.data.polls)

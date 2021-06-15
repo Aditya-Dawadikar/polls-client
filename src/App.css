@@ -35,6 +35,14 @@
     right: 10px;
 }
 
+.action{
+    height: 20px;
+    font-size: 10px;
+    padding:5px;
+    outline: none;
+    border: none;
+}
+
 .show-action{
     font-size: 10px;
     background-color: rgb(65, 202, 65);
@@ -56,7 +64,7 @@
     width: 400px;
     position: absolute;
     left: calc(50% - 200px);
-    top: calc(50% - 200px);
+    top: calc(50% - 100px);
     box-shadow: rgb(95, 93, 77) 0px 0px 10px;
 }
 
@@ -130,21 +138,123 @@
 }
 
 .brand-cont{
-    margin-left:30px;
-    margin-right:30px;
+    margin:30px 10px 30px 10px;
 }
 
 .user-name{
     font-size: 30;
+    margin:30px 10px 30px 10px;
     font-weight: bold;
-    margin-left:30px;
-    margin-right:30px;
     min-width: 100px;
     max-width: fit-content;
-    padding-top: 4px;
+    padding: 4px 10px 0px 10px;
     text-align: center;
     height: 34px;
     border-radius: 20px;
     box-shadow: rgb(115, 113, 88) 0px 0px 10px;
     cursor: pointer;
 }
+/*-------------------------login----------------------*/
+
+/*-------------------------Nav bar----------------------*/
+/*test nav*/
+.nav {
+    /* height: 50px; */
+    width: 100%;
+    background-color: #ffffff;
+    position: fixed;
+    top:0;
+    box-shadow: #000 0px 0px 10px;
+    z-index: 9999;
+  }
+  
+  .nav > .nav-header {
+    display: inline;
+  }
+  
+  .nav > .nav-header > .nav-title {
+    display: inline-block;
+    font-size: 22px;
+    color: rgb(8, 0, 0);
+    padding: 10px 10px 10px 10px;
+  }
+  
+  .nav > .nav-btn {
+    display: none;
+  }
+  
+  .nav > .nav-links {
+    display: inline;
+    float: right;
+    font-size: 18px;
+    /* font-family: 'Baloo Chettan 2', cursive; */
+  }
+  
+  .nav > .nav-links > a {
+    display: inline-block;
+    padding: 12px 10px 12px 10px;
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  .nav > .nav-links > a:hover {
+    color: rgb(255, 238, 0);
+    background-color: rgb(0, 0, 0);
+  }
+  
+  .nav > #nav-check {
+    display: none;
+  }
+  
+  @media (max-width:800px) {
+
+    .nav{
+        position: relative;
+    }
+
+    .nav > .nav-btn {
+      display: inline-block;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+    .nav > .nav-btn > label {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      padding: 13px;
+    }
+    .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+      background-color: rgb(255, 238, 0);
+    }
+    .nav > .nav-btn > label > span {
+      display: block;
+      width: 25px;
+      height: 10px;
+      border-top: 2px solid rgb(0, 0, 0);
+    }
+    .nav > .nav-links {
+      position: absolute;
+      display: block;
+      width: 100%;
+      background-color: rgb(255, 255, 255);
+      height: 0px;
+      transition: all 0.3s ease-in;
+      overflow-y: hidden;
+      top: 140px;
+      left: 0px;
+    }
+    .nav > .nav-links > a {
+      display: block;
+      width: 100%;
+    }
+    .nav > #nav-check:not(:checked) ~ .nav-links {
+      height: 0px;
+    }
+    .nav > #nav-check:checked ~ .nav-links {
+      height: calc(100vh - 50px);
+      overflow-y: auto;
+    }
+  }
+/*end of test nav*/
+/*-------------------------Nav bar----------------------*/

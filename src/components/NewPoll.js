@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState,useRef,useEffect } from 'react'
 import axios from 'axios'
+import secrets from '../secrets'
 
 const NewPoll = (props) => {
 
@@ -9,6 +10,8 @@ const NewPoll = (props) => {
     const [currInput,currInputSetter] = useState("")
 
     const optionBox = useRef();
+
+    let baseURL=secrets.baseAPIURL
 
     const setOption=(option)=>{
         currInputSetter(option)
@@ -55,9 +58,9 @@ const NewPoll = (props) => {
         }else{flag++}
 
         if(flag==2){
-            // console.log(newPoll)
+            let url = baseURL+"/api/poll/createpoll"
 
-            axios.post('http://localhost:3030/api/poll/createpoll',{
+            axios.post(url,{
                 id:localStorage.getItem('userid'),
                 poll:newPoll
             })
@@ -65,7 +68,7 @@ const NewPoll = (props) => {
                 // console.log(response)
                 if(response.status===200){
                     alert("poll created successfully")
-                    props.setCreated(response.data.poll)
+                    props.setCreated(response.data.poll._id)
                 }
             })
             .catch(err=>{

@@ -27,7 +27,7 @@ const Stats = (props) => {
     }
 
     return (
-        <div className="Details">
+        <div className="container Details">
                 <div className="poll-title brand-name">{props.poll.name}</div>
                 <table className="table">
                     <thead>
@@ -62,7 +62,6 @@ const Stats = (props) => {
                         }
                     </tbody>
                 </table>
-               
         </div>
     )
 }

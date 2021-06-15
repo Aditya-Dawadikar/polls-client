@@ -1,9 +1,12 @@
 import axios from 'axios'
 import React,{useState,useEffect} from 'react'
+import secrets from '../secrets'
 
 const PollsList = (props) => {
 
     const [polls,setPolls] = useState([])
+
+    let baseURL=secrets.baseAPIURL
 
     useEffect(() => {
         setPolls(props.polls)
@@ -18,9 +21,8 @@ const PollsList = (props) => {
     const deletePoll=(e,index)=>{
         e.preventDefault()
 
-        // console.log(polls[index]._id);
-
-        axios.post('http://localhost:3030/api/poll/deletepoll',{
+        let url = baseURL+"/api/poll/deletepoll"
+        axios.post(url,{
             userid:localStorage.getItem('userid'),
             poll:polls[index]._id
         })
@@ -42,15 +44,37 @@ const PollsList = (props) => {
         props.setPoll(index)
     }
 
+    function textToClipboard (text) {
+        var dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = text;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+    }
+
+    const copyLink = (e,index)=>{
+        let url = "http://localhost:3000/vote/"
+        let ownerId = localStorage.getItem('userid')
+        let pollId=polls[index]._id
+
+        url+=ownerId+"/"+pollId
+        
+        textToClipboard(url)
+    }
+
     const ShowPolls=()=>{
         if(polls.length>0){
             return <div className="margin-20">
-                <ul className="list-group">
+                <ul className="list-group" style={{width:"325px"}}>
                     {
                         polls.map((poll,index)=>{
                             return <li key={index} className="list-group-item">{poll.name}
-                                        <button className="show-action" onClick={(e)=>{showResult(e,index)}}>Show Result</button>
                                         <button className="clear" onClick={(e)=>{deletePoll(e,index)}}>X</button>
+                                        <div className="row row-cols-2">
+                                            <div className="col"><button className="action bg-success text-white" onClick={(e)=>{copyLink(e,index)}}>Copy Link to clickboard</button></div>
+                                            <div className="col"><button className="action bg-info  text-white" onClick={(e)=>{showResult(e,index)}}>Show Result</button></div>
+                                        </div>
                                     </li>
                         })
                     }

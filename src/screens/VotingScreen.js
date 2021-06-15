@@ -1,30 +1,58 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Navbar from '../components/Navbar'
 import Vote from '../components/Vote'
 import AnalysePoll from '../components/AnalysePoll'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
+import secrets from '../secrets'
 
 const VotingScreen = () => {
 
     const [voted,setVoteStatus] = useState(false)
     const [poll,setPoll] = useState({
-        name:"p1",
+        name:"",
         options:[
             {
-                name:"c1",
-                count: 10
-            },{
-                name:"c2",
-                count: 55
-            },{
-                name:"c3",
-                count: 32
-            },{
-                name:"c4",
-                count: 25
+                name:"",
+                count: 0
             }
-        ]
+        ],
+        voters:[]
     })
+
+    let baseURL=secrets.baseAPIURL
+
+    useEffect(()=>{
+        console.log(localStorage.getItem('userid'))
+        if(localStorage.getItem('userid')===null){
+            let currURL = window.location.href
+            let token = currURL.split('/')
+            let redirect = '/vote/'+token[4]+"/"+token[5]
+            localStorage.setItem('redirect',redirect)
+            window.location.replace('/')
+        }
+    })
+
+    useEffect(()=>{
+        let currURL = window.location.href
+        let tokens = currURL.split('/')
+        let ownerId = tokens[4]
+        let pollId = tokens[5]
+        let url=baseURL+"/api/poll/getpoll/"+ownerId+"/"+pollId
+        axios.get(url)
+        .then(response=>{
+            setPoll(response.data.poll)
+            let votersList=response.data.poll.voters.map(voter=>{
+                return String(voter)
+            })
+            if(votersList.includes(localStorage.getItem('userid'))){
+                setVoteStatus(true)
+            }
+        }).catch(err=>{
+            console.log(err)
+        })
+
+    },[])
 
     const View=()=>{
         
@@ -68,10 +96,11 @@ const VotingScreen = () => {
         <div>
             <Navbar/>
             <div className="space"></div>
+            <div className="space"></div>
             <br/> 
             <TopOption/>
             <div className="space"></div> 
-            <div className="container">
+            <div>
                 <View/>
             </div>
             <div className="space"></div>
